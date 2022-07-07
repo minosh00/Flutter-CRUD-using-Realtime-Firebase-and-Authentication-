@@ -26,7 +26,7 @@ class _UpdateStudentPageState extends State<UpdateStudentPage> {
         key: _formKey,
 
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 10.0),
+          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
           child:ListView(
            children: [
             Container(
@@ -51,7 +51,7 @@ class _UpdateStudentPageState extends State<UpdateStudentPage> {
               },
             ),
             ),
-
+              
              Container(
               margin: EdgeInsets.symmetric(vertical: 10.0),
               child:TextFormField(
