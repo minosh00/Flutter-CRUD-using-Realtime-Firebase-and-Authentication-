@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crud/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class AddStudentPage extends StatefulWidget {
+  
   const AddStudentPage({Key? key}) : super(key: key);
 
   @override
@@ -37,8 +39,15 @@ class _AddStudentPageState extends State<AddStudentPage> {
       passwordController.clear();
     }
 
-    addUser() {
-      print("user added!");
+    //for adding data
+    CollectionReference students =
+        FirebaseFirestore.instance.collection('students');
+
+    Future<void> addUser() {
+      return students
+          .add({'Name': name, 'Email': email, 'password': password})
+          .then((value) => print("User Added"))
+          .catchError((Error) => print("Failed to add user: $Error"));
     }
 
     return Scaffold(
@@ -121,28 +130,33 @@ class _AddStudentPageState extends State<AddStudentPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     ElevatedButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            setState(() {
-                              name = nameController.text;
-                              email = emailController.text;
-                              password = passwordController.text;
-                              addUser();
-                              clearText();
-                            });
-                          }
-                        },
-                        child: Text("Register", style: TextStyle(fontSize: 18),
-                        ),
-                        style: ElevatedButton.styleFrom(primary: Color.fromARGB(255, 8, 72, 104)),
-                        ),
-
-                        ElevatedButton(
-                        onPressed: () => {clearText()},
-                        child: Text('Reset',style: TextStyle(fontSize: 18.0),
-                        ),
-                        style: ElevatedButton.styleFrom(primary: Color.fromARGB(255, 21, 189, 85)),
-                        ),
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          setState(() {
+                            name = nameController.text;
+                            email = emailController.text;
+                            password = passwordController.text;
+                            addUser();
+                            clearText();
+                          });
+                        }
+                      },
+                      child: Text(
+                        "Register",
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                          primary: Color.fromARGB(255, 8, 72, 104)),
+                    ),
+                    ElevatedButton(
+                      onPressed: () => {clearText()},
+                      child: Text(
+                        'Reset',
+                        style: TextStyle(fontSize: 18.0),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                          primary: Color.fromARGB(255, 21, 189, 85)),
+                    ),
                   ],
                 ),
               )
