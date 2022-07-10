@@ -14,20 +14,23 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text1("CRUD Flutter App", 20, fw: FontWeight.bold),
-            button1(
-              context,
-              AddStudentPage(), 
-              Text1("Add", 20, fw: FontWeight.bold))
-          ],
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text1("CRUD Flutter App", 25, fw: FontWeight.bold),
+              button1(
+                context,
+                AddStudentPage(), 
+                Text1("Add", 20, fw: FontWeight.bold))
+            ],
+          ),
         ),
+        body: ListStudentPage(),
       ),
-      body: ListStudentPage(),
     );
   }
 }

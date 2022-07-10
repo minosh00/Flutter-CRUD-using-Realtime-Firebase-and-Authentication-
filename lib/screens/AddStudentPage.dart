@@ -50,117 +50,120 @@ class _AddStudentPageState extends State<AddStudentPage> {
           .catchError((Error) => print("Failed to add user: $Error"));
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text1("Add new student", 20),
-      ),
-      body: Form(
-        key: _formKey,
-        child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-          child: ListView(
-            children: [
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 10.0),
-                child: TextFormField(
-                  autofocus: false,
-                  decoration: InputDecoration(
-                      labelText: "Name",
-                      labelStyle: TextStyle(
-                        fontSize: 20,
-                      ),
-                      border: OutlineInputBorder(),
-                      errorStyle:
-                          TextStyle(color: Colors.redAccent, fontSize: 15)),
-                  controller: nameController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return ("Please enter name");
-                    }
-                    return null;
-                  },
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Center(child: Text1("Add new student", 25,fw: FontWeight.bold)),
+        ),
+        body: Form(
+          key: _formKey,
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+            child: ListView(
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 10.0),
+                  child: TextFormField(
+                    autofocus: false,
+                    decoration: InputDecoration(
+                        labelText: "Name",
+                        labelStyle: TextStyle(
+                          fontSize: 20,
+                        ),
+                        border: OutlineInputBorder(),
+                        errorStyle:
+                            TextStyle(color: Colors.redAccent, fontSize: 15)),
+                    controller: nameController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return ("Please enter name");
+                      }
+                      return null;
+                    },
+                  ),
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 10.0),
-                child: TextFormField(
-                  autofocus: false,
-                  decoration: InputDecoration(
-                      labelText: "Email",
-                      labelStyle: TextStyle(
-                        fontSize: 20,
-                      ),
-                      border: OutlineInputBorder(),
-                      errorStyle:
-                          TextStyle(color: Colors.redAccent, fontSize: 15)),
-                  controller: emailController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return ("Please enter email");
-                    } else if (!value.contains("@")) {
-                      return ("Enter a valid emeil");
-                    }
-                    return null;
-                  },
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 10.0),
+                  child: TextFormField(
+                    autofocus: false,
+                    decoration: InputDecoration(
+                        labelText: "Email",
+                        labelStyle: TextStyle(
+                          fontSize: 20,
+                        ),
+                        border: OutlineInputBorder(),
+                        errorStyle:
+                            TextStyle(color: Colors.redAccent, fontSize: 15)),
+                    controller: emailController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return ("Please enter email");
+                      } else if (!value.contains("@")) {
+                        return ("Enter a valid emeil");
+                      }
+                      return null;
+                    },
+                  ),
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 10.0),
-                child: TextFormField(
-                  autofocus: false,
-                  decoration: InputDecoration(
-                      labelText: "Password",
-                      labelStyle: TextStyle(
-                        fontSize: 20,
-                      ),
-                      border: OutlineInputBorder(),
-                      errorStyle:
-                          TextStyle(color: Colors.redAccent, fontSize: 15)),
-                  controller: passwordController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return ("Please enter password");
-                    }
-                    return null;
-                  },
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 10.0),
+                  child: TextFormField(
+                    autofocus: false,
+                    decoration: InputDecoration(
+                        labelText: "Password",
+                        labelStyle: TextStyle(
+                          fontSize: 20,
+                        ),
+                        border: OutlineInputBorder(),
+                        errorStyle:
+                            TextStyle(color: Colors.redAccent, fontSize: 15)),
+                    controller: passwordController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return ("Please enter password");
+                      }
+                      return null;
+                    },
+                  ),
                 ),
-              ),
-              Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          setState(() {
-                            name = nameController.text;
-                            email = emailController.text;
-                            password = passwordController.text;
-                            addUser();
-                            clearText();
-                          });
-                        }
-                      },
-                      child: Text(
-                        "Register",
-                        style: TextStyle(fontSize: 18),
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            setState(() {
+                              name = nameController.text;
+                              email = emailController.text;
+                              password = passwordController.text;
+                              addUser();
+                              clearText();
+                            });
+                          }
+                        },
+                        child: Text(
+                          "Register",
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                            primary: Color.fromARGB(255, 8, 72, 104)),
                       ),
-                      style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255, 8, 72, 104)),
-                    ),
-                    ElevatedButton(
-                      onPressed: () => {clearText()},
-                      child: Text(
-                        'Reset',
-                        style: TextStyle(fontSize: 18.0),
+                      ElevatedButton(
+                        onPressed: () => {clearText()},
+                        child: Text(
+                          'Reset',
+                          style: TextStyle(fontSize: 18.0),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                            primary: Color.fromARGB(255, 21, 189, 85)),
                       ),
-                      style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255, 21, 189, 85)),
-                    ),
-                  ],
-                ),
-              )
-            ],
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
